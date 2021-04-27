@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+<center>
+  <div class="row">
+      {% for i in allbooks %}
+          <div class="col-md-4" style="margin-bottom: 30px;">
+
+      <div class="card">
+          <div style="height: 250px">
+              {% if i.bookcover %}
+        <img class="card-img-top" height="100%" width="auto" style="background-size: cover" src="{{ i.bookcover.url }}" alt="Bologna">
+         {% else %}
+               <img class="card-img-top" height="100%" width="auto" style="background-size: cover" src="https://dynamicmediainstitute.org/wp-content/themes/dynamic-media-institute/imagery/default-book.png" alt="Bologna">
+         {% endif %}
+          </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ i.title }}
+            {% if i.favorite %}
+                  <i class="fa fa-heart" style="color:red;"></i>
+              {% endif %}
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted">Genre - {{ i.genre.name }}</h6>
+          <div class="card-text" style="overflow-y:scroll;height:50px">
+              {{ i.review }}
+               </div>
+
+            <div style="display: flex;justify-content: center">
+                {% if i.type == 'Ebook' %}
+                <p class="card-text">Type: <b>{{ i.type }} <a href="{{ i.bookfile.url }}" target="_blank" style="padding-left: 10px">Read Book</a></b></p>
+
+                    {% else %}
+                      <p class="card-text">Type: <b>{{ i.type }}</b></p>
+                {% endif %}
+            </div>
+            <div class="rating">
+
+                <label>
+                    {% for n in stars %}
+                        {% if n <= i.review_stars %}
+                <span class="icon" style="color: orange">★</span>
+                            {% else %}
+                 <span class="icon">★</span>
+                        {% endif %}
+
+                        {% endfor %}
+
+                </label>
+                          </div>
+        <div style="display: flex;justify-content: center">
+
+                <a href="{% url 'edit_book' i.id %}?next={{ request.path }}&page={{ allbooks.number }}" style="padding-left: 10px;font-size: 25px"><i class="fa fa-pencil-square text-dark"></i></a>
+               <a href="{% url 'delete_book' i.id %}?next={{ request.path }}&page={{ allbooks.number }}" style="padding-left: 10px;font-size: 25px"><i class="fa fa-trash-o text-secondary"></i></a>
+
+            </div>
+
+        </div>
+      </div>
+          </div>
+      {% endfor %}
+
+    </div>
+ {% if allbooks.has_other_pages %}
+<div style="display: flex;justify-content: center">
+  <ul class="pagination pagination-lg bg-dark">
+  {% if allbooks.number > 1 %}
+    <li class="page-item">
+      <a class="page-link bg-dark text-white" href="?page={{ allbooks.previous_page_number }}">&laquo;</a>
+    </li>
+      {% else %}
+       <li class="page-item disabled">
+      <a class="page-link" href="#">&laquo;</a>
+    </li>
+      {% endif %}
+       {% for i in allbooks.paginator.page_range %}
+            {% if allbooks.number == i %}
+    <li class="page-item active">
+      <a class="page-link bg-dark text-white" style="border: none" href="?page={{ i }}">{{ i }}</a>
+    </li>
+                {% else %}
+                <li class="page-item ">
+      <a class="page-link  text-dark" href="?page={{ i }}">{{ i }}</a>
+    </li>
+
+           {% endif %}
+      {% endfor %}
+{% if allbooks.number < pages %}
+    <li class="page-item">
+      <a class="page-link bg-dark text-white" href="?page={{ allbooks.next_page_number }}">&raquo;</a>
+    </li>
+    {% else %}
+     <li class="page-item disabled">
+      <a class="page-link" href="#">&raquo;</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+</center></div>
+
+
+    <script>
+    $(document).ready(function() {
+    $('#booklist').DataTable();
+} );
+
+</script>
+{% endblock %}

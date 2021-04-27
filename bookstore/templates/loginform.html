@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block body %}
+
+<div
+  class="container"
+  style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  "
+>
+  <center>
+    <h3>Login Your Account</h3>
+    <br /><br />
+    {% if error %}
+    <p style="color: red">Either Username or password is Incorrect</p>
+    {% endif %}
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Enter Username"
+          class="form-control"
+          style="max-width: 500px"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          placeholder="Enter Password"
+          class="form-control"
+          style="max-width: 500px"
+          name="pwd"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-dark" value="Login" />
+      </div>
+    </form>
+    <p>
+      Admin Login Username: <b>admin</b> <br />
+      Admin Login Password: <b>123456</b>
+    </p>
+    <br />
+
+    <p>
+      <a href="{% url 'signup' %}" class="text-dark"
+        ><b>Create New Account</b></a
+      >
+    </p>
+  </center>
+</div>
+
+{% endblock %}

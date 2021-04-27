@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="container" style="position: absolute;top:50%;left:50%;transform: translate(-50%,-50%)">
+          <center>
+            <h3 style="margin-top: 150px;">Create New Account</h3><br><br>
+              {% if error %}
+               <p style="color: red">This UserName is Already Exists.</p>
+           {% endif %}
+           <form method="post" action="" onsubmit="return handleForm()">
+               {% csrf_token %}
+                <div class="form-group">
+                  <input type="text" placeholder="Enter FullName" class="form-control"
+                         style="max-width: 500px" name="fullname" required>
+               </div>
+                <div class="form-group">
+                  <input type="email" placeholder="Enter Email" class="form-control"
+                         style="max-width: 500px" name="email" required>
+               </div>
+               <div class="form-group">
+                  <input type="text" placeholder="Enter Username" class="form-control"
+                         style="max-width: 500px" name="username" required>
+               </div>
+               <div class="form-group">
+                   <input type="password" placeholder="Enter Password"
+                          class="form-control" required id="pwd" style="max-width: 500px" name="pwd">
+
+               </div>
+                <p class="text-danger" id="error"></p>
+               <div class="form-group">
+                   <input type="password" placeholder="Confirm Password"
+                          class="form-control" required id="cpwd" style="max-width: 500px" name="cpwd">
+
+               </div>
+               <div class="form-group">
+                   <input type="submit"  class="btn btn-dark" value="Sign UP">
+
+               </div>
+           </form>
+           <br>
+
+            <p><a href="{% url 'login' %}" class="text-dark"><b>Already have account. Login</b></a></p>
+</center>
+    </div>
+    <script>
+    function handleForm() {
+       var p = document.getElementById('pwd').value ;
+       var c = document.getElementById('cpwd').value;
+       if(p === c){
+           return true
+       }
+       else{
+          document.getElementById('error').innerHTML = '<h5>Re-Enter password</h3>'
+          document.getElementById('cpwd').value = ''
+          return false
+       }
+    }
+</script>
+
+{% endblock %}

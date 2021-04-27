@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+           <div class="container">
+            <h3>Add New Book</h3>
+     <form method="post" action="" enctype="multipart/form-data">
+               {% csrf_token %}
+         <div class="row">
+                          <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Select Genre</b></label>
+                  {{ form.genre }}
+               </div></div>
+                           <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Book Title</b></label>
+                   {{ form.title }}
+
+               </div></div>
+             <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Book Cover (optional)</b></label>
+                  <input type="file" name="cover" accept="image/*" class="form-control">
+
+               </div></div>
+               <div class="col-md-6">
+               <div class="form-group">
+                 <label style="float:left"><b>Book Type</b></label>
+                  {{ form.type }}
+               </div>
+               </div>
+            <div id="ebook">
+
+            </div>
+
+
+
+
+
+               <div class="col-md-12">
+
+                <div class="form-group">
+
+                     <label style="float:left"><b>Book review</b></label>
+
+                  {{ form.review }}
+               </div>
+               </div>
+              <div class="col-lg-2">
+                               <div class="form-group">
+
+                     <label style="float: left"><b>Favorite ? &nbsp;&nbsp;</b></label>
+
+                                  {{ form.favorite }}
+                               </div>
+              </div>
+              <div class="col-md-4">
+                              <div class="form-group">
+                             <label style="float:left"><b>Book Rating</b></label>
+                                  <br>
+                          <div class="rating">
+                                       <label>
+                                        <input type="radio" checked name="stars" value="1" />
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" value="2" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" value="3" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" value="4" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" value="5" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                          </div>
+                      </div>
+
+                         </div>
+
+
+
+                      </div>
+          <div style="display: flex;justify-content: center">
+
+
+                   <input type="submit"  class="btn btn-dark" value="Add Book">
+
+               </div>
+             </form></div>
+
+
+
+
+{% endblock %}

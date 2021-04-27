@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+           <div class="container">
+           <center>
+                <h3>{{ data.title }}</h3>
+               {% if data.bookcover %}
+                <div style="height: 150px;width: 150px;margin-bottom: 50px">
+
+        <img class="card-img-top" height="100%" width="auto" style="background-size: cover" src="{{ data.bookcover.url }}" >
+         <h5>Book Cover</h5>
+          </div>
+               {% endif %}
+           </center>
+     <form method="post" action="" enctype="multipart/form-data">
+               {% csrf_token %}
+         <div class="row">
+                          <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Select Genre</b></label>
+                  {{ form.genre }}
+               </div></div>
+                           <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Book Title</b></label>
+                   {{ form.title }}
+
+               </div></div>
+             <div class="col-md-6">
+               <div class="form-group">
+                     <label style="float:left"><b>Book Cover (optional)
+                     </b></label>
+                  <input type="file" name="cover" accept="image/*"  class="form-control">
+
+               </div></div>
+               <div class="col-md-6">
+               <div class="form-group">
+                 <label style="float:left"><b>Book Type</b></label>
+                  {{ form.type }}
+               </div>
+               </div>
+            <div id="ebook">
+
+            </div>
+
+               <div class="col-md-12">
+
+                <div class="form-group">
+
+                     <label style="float:left"><b>Book review</b></label>
+
+                  {{ form.review }}
+               </div>
+               </div>
+              <div class="col-lg-2">
+                               <div class="form-group">
+
+                     <label style="float: left"><b>Favorite ? &nbsp;&nbsp;</b></label>
+
+                                  {{ form.favorite }}
+                               </div>
+              </div>
+              <div class="col-md-4">
+                              <div class="form-group">
+                             <label style="float:left"><b>Book Rating</b></label>
+                                  <br>
+                          <div class="rating">
+                                       <label>
+                                        <input type="radio" checked name="stars" {{ stars.1 }} value="1" />
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" {{ stars.2 }} value="2" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" {{ stars.3 }} value="3" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" {{ stars.4 }} value="4" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                                      <label>
+                                        <input type="radio" name="stars" {{ stars.5 }} value="5" />
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                        <span class="icon">★</span>
+                                      </label>
+                          </div>
+                      </div>
+
+                         </div>
+
+
+
+                      </div>
+          <div style="display: flex;justify-content: center">
+
+
+                   <input type="submit"  class="btn btn-dark" value="Edit Book">
+
+               </div>
+             </form></div>
+
+
+
+{% endblock %}
